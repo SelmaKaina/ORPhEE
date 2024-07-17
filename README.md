@@ -88,14 +88,17 @@ Pour les deux éléments enfants de AuthorizedAgent évoquésez ci-dessus, notez
 
 ##### 2.1.2.	Le choix des métadonnées à extraire
 À l’aide des fonctions du logiciel Exiftool , les métadonnées descriptives internes renseignées par les photographes ou iconographes du service producteur peuvent être extraites et ajoutées aux balises SEDA correspondantes dans les ArchiveUnit de niveau « photographie ». Dans cette partie du formulaire, chaque case cochée correspond à un champ de métadonnées que l’utilisateur souhaite extraire des fichiers pour l’ajouter au manifest. 
-| Métadonnée | Description | Balise(s) SEDA |
-| -CreateDate | Date de création du fichier dans l’appareil photo	| Content/StartDate et EndDate |
-| -FileModifyDate	| Date de dernière modification du fichier.	| BinaryDataObject/FileInfo/LastModified |
-| -By-line, -Artist, -Creator	| Nom du photographe.	| Content/AuthorizedAgent/FullName |
-| -Country, -Country-PrimaryLocationName |	Lieu de la prise de vue (pays).	Coverage/Spatial |
-| -City |	Lieu de la prise de vue (ville). | Coverage/Spatial |
-| -Caption-Abstract, -Description	| Légende de la photographie.	| Content/Description |
-| -Subject / -Keywords | Mots-clés. | Content/Tag |
+
+
+| **Métadonnée**                               | **Description**                                       | **Balise(s) SEDA**                         |
+|---                                           |:-:                                                    |-:                                          |
+| -CreateDate                                  | Date de création du fichier dans l’appareil photo	    | Content/StartDate et EndDate               |
+| -FileModifyDate	                             | Date de dernière modification du fichier.	            | BinaryDataObject/FileInfo/LastModified     |
+| -By-line, -Artist, -Creator	                 | Nom du photographe.	                                  | Content/AuthorizedAgent/FullName           |
+| -Country, -Country-PrimaryLocationName       |	Lieu de la prise de vue (pays).	                      | Coverage/Spatial                           |
+| -City                                        |	Lieu de la prise de vue (ville).                      | Coverage/Spatial                           |
+| -Caption-Abstract, -Description	             | Légende de la photographie.	                          | Content/Description                        |
+| -Subject, -Keywords                          | Mots-clés.                                            | Content/Tag                                |
 
 
 Comme l’indique le tableau ci-dessus, plusieurs éléments peuvent correspondre à deux voire trois champs de métadonnées internes. Si un travail d’analyse des métadonnées a été réalisé en amont, il conviendra de choisir le champ le mieux renseigné au sein du fonds traité. Si plusieurs champs correspondant à une même balise SEDA sont cochés, celles-ciles métadonnées seront traitées selon un ordre de priorité : 
