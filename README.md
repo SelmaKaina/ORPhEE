@@ -91,7 +91,7 @@ Pour les deux éléments enfants de AuthorizedAgent évoquésez ci-dessus, notez
 
 
 | **Métadonnée**                               | **Description**                                       | **Balise(s) SEDA**                         |
-|---                                           |:-:                                                    |-:                                          |
+|---                                           |---                                                    |---                                         |
 | -CreateDate                                  | Date de création du fichier dans l’appareil photo	    | Content/StartDate et EndDate               |
 | -FileModifyDate	                             | Date de dernière modification du fichier.	            | BinaryDataObject/FileInfo/LastModified     |
 | -By-line, -Artist, -Creator	                 | Nom du photographe.	                                  | Content/AuthorizedAgent/FullName           |
@@ -173,7 +173,7 @@ Les trois fonctions suivantes ont pour objectif l’extraction des métadonnées
 
 
 ##### 3.2.1.	PyExiftool
-exif_extract() prend comme arguments le chemin du répertoire (dir_path) contenant les reportages et la liste des reportages à ajouter au SIP. La fonction parcourt chaque numéro identifiant de reportage dans la liste et chaque élément (item) présent dans le répertoire (dir_path). Si un numéro identifiant présent dans la liste n’est pas identifié trouvé dans les noms de dossier, la moulinette est interrompue et renvoie un message d’erreur indiquant l’identifiant e numéro du reportage qui n’a pas été identifiétrouvé. Si tous les numéros identifiants sont identifiéstrouvés, elle boucle sur l’ensemble des dossiers correspondants (item) et recrée leur chemin (item_path) en concaténant le chemin du répertoire (dir_path) au nom de l’élément (item). Dans la même boucle, à l’aide de la fonction execute_json() de la librairie PyExiftool, les métadonnées internes de l’ensemble des fichiers contenus dans le dossier sélectionné sont extraites au format json. 
+La fonction exif_extract() prend comme arguments le chemin du répertoire (dir_path) contenant les reportages et la liste des reportages à ajouter au SIP. La fonction parcourt chaque numéro identifiant de reportage dans la liste et chaque élément (item) présent dans le répertoire (dir_path). Si un numéro identifiant présent dans la liste n’est pas identifié trouvé dans les noms de dossier, la moulinette est interrompue et renvoie un message d’erreur indiquant l’identifiant e numéro du reportage qui n’a pas été identifiétrouvé. Si tous les numéros identifiants sont identifiéstrouvés, elle boucle sur l’ensemble des dossiers correspondants (item) et recrée leur chemin (item_path) en concaténant le chemin du répertoire (dir_path) au nom de l’élément (item). Dans la même boucle, à l’aide de la fonction execute_json() de la librairie PyExiftool, les métadonnées internes de l’ensemble des fichiers contenus dans le dossier sélectionné sont extraites au format json. 
 La syntaxe est similaire à celle du logiciel en ligne de commande Exiftool :
 -r permet de traiter de manière récursive les fichiers dans les sous-répertoires.
 -b permet d’extraire les métadonnées demandées au format binaire. Ce paramètre est utilisé pour contourner certains problèmes causés par les différences d’encodage au sein des métadonnées internes.
