@@ -1,4 +1,4 @@
-# ORPhEE
+# ORPhÉE
 
 ## Présentation et guide d’utilisation d’ORPhÉE  
 
