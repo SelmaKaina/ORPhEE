@@ -30,13 +30,13 @@ Les fichiers contenant dans leur nom les chaînes suivantes ne sont pas traités
 Des analyses et nettoyages préalables sont cependant nécessaires en amont de l’utilisation de l’application. La présence de chemins trop longs et de certains caractères spéciaux dans les nommages de dossiers et de fichiers peuvent empêcher le bon fonctionnement de l’application. 
 *	Les chemins des fichiers ne doivent pas dépasser 255 caractères.
 *	Les caractères spéciaux et accentués doivent être supprimées ou remplacés dans les noms de dossiers et de fichiers, par exemple à l’aide du logiciel AntRenamer. Exemple de caractères problématiques :
--	Les lettres accentuées ;
--	Les tirets longs et moyens (— ; –) ;
--	Les espaces insécables ;
--	La chaîne « espace + tiret + espace » ;
--	Deux espaces consécutives ;
--	L’apostrophe typographique ;
--	Les icônes (ex : ☎, ✂).
+    -	Les lettres accentuées ;
+    -	Les tirets longs et moyens (— ; –) ;
+    -	Les espaces insécables ;
+    -	La chaîne « espace + tiret + espace » ;
+    -	Deux espaces consécutives ;
+    -	L’apostrophe typographique ;
+    -	Les icônes (ex : ☎, ✂).
 
 #### 1.3.	Préparation des fichiers de données
 ##### 1.3.1.	Le CSV de métadonnées externes
@@ -56,18 +56,24 @@ Une solution basée sur des limites volumétrique imposées à l’application a
 -	Risque d’import de reportages non consécutifs ;
 -	Empêche une sélection selon une logique intellectuelle qui pourrait être souhaitée par le fabricateur (regroupement selon des critères temporels ou de communicabilité par exemple).
 La solution retenue est celle d’un fichier texte importé dans l’application et dans lequel se trouvent l’ensemble des identifiants des reportages à ajouter au paquet. Chaque identifiant de reportage doit occuper une ligne, sans ajout de séparateur ni d’espace. Ils doivent apparaître dans l’ordre dans lequel on souhaite que les reportages apparaissent dans le SIP. Si les identifiants sont correctement triés dans le csv de métadonnées externes, alors il suffit de copier les cellules de la colonne correspondant aux identifiants des reportages à ajouter et de les coller dans le fichier texte.
-Nota : Cette étape peut être fastidieuse, notamment pour les reportages « bis » qui risquent de ne pas apparaître au bon endroit lorsque le csv est trié en suivant l’ordre des numéros identifiants de reportage. 
+Nota : Cette étape peut être fastidieuse, notamment pour les reportages « bis » qui risquent de ne pas apparaître au bon endroit lorsque le csv est trié en suivant l’ordre des numéros identifiants de reportage.
+
+
 ##### 1.3.3.	Points de vigilance
 1 : Veiller à ce que les numéros identifiants de reportage du fichier csv et du fichier texte soient identiques à ceux présents dans les noms des dossiers de reportages. Apporter une attention particulière aux reportages avec des identifiants spéciaux, par exemple avec la mention « bis », qui peut être écrite en toutes lettres ou seulement indiquée par la lettre « B ». Le cas échéant, il n’est pas nécessaire de corriger les différences de casse : pour la reconnaissance des numéros identifiants de reportages, la moulinette passe automatiquement la chaîne en minuscules. 
 2 : Veiller à ce que les fichiers csv et txt soient bien encodés en UTF-8.
 3 : Dans la colonne « Numéro/identifiant du reportage » comme dans le fichier texte, veiller à ce que chaque ligne non vide contienne bien un numéro identifiant de reportage valide. Toute chaîne de caractères identifiée dans la colonne « Numéro/identifiant du reportage » ou dans une ligne du fichier texte peut servir de valeur pivot et donc remonter des informations erronées : par exemple, une cellule ne contenant qu’une espace sera associée à l’ensemble des dossiers dont le nom contient contenant au moins une espace dans leur nom. 
 2.	Mode d’emploi détaillé de l’application
+
+
 #### 2.1.	Le formulaire
 Pour s’adapter à des contextes différents de celui dans lequel l’application a été originellement créée, mais aussi pour faciliter son l’utilisation de l’application, un formulaire a été créé. Il peut être divisé en quatre parties : 
 -	Les informations à renseigner ;
 -	Le choix des métadonnées internes à extraire ;
 -	Le rattachement à une autre unité d’archive (optionnel) ;
 -	L’import des données et des fichiers de métadonnées externes (liste des reportages et instrument de recherche).
+
+-	
 ##### 2.1.1.	Les informations à renseigner
 Les deux premières informations à fournir sont le numéro d’entrée du paquet et le numéro du paquet. Ces informations seront ensuite fusionnées et complétées afin de créer le contenu de l’élément SEDA ArchivalAgencyArchiveUnitIdentifier de chaque unité d’archive, c’est-à-dire la nouvelle cote de l’UA dans le SAE numérique.
 
@@ -133,6 +139,7 @@ Après avoir soumis le formulaire, l’application va commencer la fabrication d
 * Création de l'élément DescriptiveMetadata.
 * Écriture du manifest.
 * Copie et renommage des fichiers dans le dossier content.
+
 Certaines étapes peuvent être longues, notamment l’extraction des métadonnées internes. ÀA titre indicatif, la constitution d’un paquet de 20Go peut prendre entre 10min et 20min, celle d’un paquet de 60Go entre 20min et 30min, et celle d’un paquet de 100Go entre 40min et 1h. 
 La fermeture de l’application arrêtera le processus de création du SIP : celle-ci elle ne doit donc être fermée qu’en cas d’erreur ou de dépassement des délais évoqués ci-dessus. 
 La fermeture de l’application arrêtera le processus de création du SIP, veillez donc à ne pas interrompre le processus simplement car, même si rien ne semble se passer. Il arrive qu’ORPhÉE soit « bloqué ». Si une étape semble durer plus longtemps qu’elle ne le devrait, appuyez une fois sur « Entrée ». Si les étapes suivantes se déclenchent immédiatement, il s’agissait d’un simple blocage. S’il ne se passe rien, c’est qu’il est encore en train de travailler : laissez-lui un peu plus de temps. Si les délais évoqués ci-dessus sont largement dépassés, ou si un message d’erreur apparait, vous pouvez fermer l’application.
