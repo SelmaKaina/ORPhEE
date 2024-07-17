@@ -19,24 +19,24 @@ Assurez-vous que l’identifiant correspond à une chaine de caractères ne cont
 #### 1.2. Nettoyage des données
 Une partie du nettoyage des données est effectué par l’application qui exclut automatiquement certains fichiers système et fichiers masqués sur des critères de nommage.
 Les fichiers contenant dans leur nom les chaînes suivantes ne sont pas traités et sont donc exclus du paquet : 
--	DS_Store
--	Thumbs
--	BridgeSort
--	PM_lock
--	desktop.ini
--	._
+*	DS_Store
+*	Thumbs
+*	BridgeSort
+*	PM_lock
+*	desktop.ini
+*	._
 
 
 Des analyses et nettoyages préalables sont cependant nécessaires en amont de l’utilisation de l’application. La présence de chemins trop longs et de certains caractères spéciaux dans les nommages de dossiers et de fichiers peuvent empêcher le bon fonctionnement de l’application. 
--	Les chemins des fichiers ne doivent pas dépasser 255 caractères.
--	Les caractères spéciaux et accentués doivent être supprimées ou remplacés dans les noms de dossiers et de fichiers, par exemple à l’aide du logiciel AntRenamer. Exemple de caractères problématiques :
-o	Les lettres accentuées ;
-o	Les tirets longs et moyens (— ; –) ;
-o	Les espaces insécables ;
-o	La chaîne « espace + tiret + espace » ;
-o	Deux espaces consécutives ;
-o	L’apostrophe typographique ;
-o	Les icônes (ex : ☎, ✂).
+*	Les chemins des fichiers ne doivent pas dépasser 255 caractères.
+*	Les caractères spéciaux et accentués doivent être supprimées ou remplacés dans les noms de dossiers et de fichiers, par exemple à l’aide du logiciel AntRenamer. Exemple de caractères problématiques :
+-	Les lettres accentuées ;
+-	Les tirets longs et moyens (— ; –) ;
+-	Les espaces insécables ;
+-	La chaîne « espace + tiret + espace » ;
+-	Deux espaces consécutives ;
+-	L’apostrophe typographique ;
+-	Les icônes (ex : ☎, ✂).
 
 #### 1.3.	Préparation des fichiers de données
 ##### 1.3.1.	Le CSV de métadonnées externes
@@ -123,16 +123,16 @@ L’utilisateur doit ensuite sélectionner les répertoires et fichiers sur lesq
 
 #### 2.2.	Suivi des opérations en cours
 Après avoir soumis le formulaire, l’application va commencer la fabrication du SIP. L’utilisateur est informé de la progression des traitements effectués par des messages signalant les opérations en cours : 
-» Extraction des métadonnées internes des photos.
-» Création de l'en-tête du manifest.
-» Création des DataObjectGroup.
-» Ajout des métadonnées aux DataObjectGroup.
-» Création des éléments ArchiveUnit.
-» Suppression des doublons dans les DataObjectGroup.
-» Attribution des identifiants.
-» Création de l'élément DescriptiveMetadata.
-» Écriture du manifest.
-» Copie et renommage des fichiers dans le dossier content.
+* Extraction des métadonnées internes des photos.
+* Création de l'en-tête du manifest.
+* Création des DataObjectGroup.
+* Ajout des métadonnées aux DataObjectGroup.
+* Création des éléments ArchiveUnit.
+* Suppression des doublons dans les DataObjectGroup.
+* Attribution des identifiants.
+* Création de l'élément DescriptiveMetadata.
+* Écriture du manifest.
+* Copie et renommage des fichiers dans le dossier content.
 Certaines étapes peuvent être longues, notamment l’extraction des métadonnées internes. ÀA titre indicatif, la constitution d’un paquet de 20Go peut prendre entre 10min et 20min, celle d’un paquet de 60Go entre 20min et 30min, et celle d’un paquet de 100Go entre 40min et 1h. 
 La fermeture de l’application arrêtera le processus de création du SIP : celle-ci elle ne doit donc être fermée qu’en cas d’erreur ou de dépassement des délais évoqués ci-dessus. 
 La fermeture de l’application arrêtera le processus de création du SIP, veillez donc à ne pas interrompre le processus simplement car, même si rien ne semble se passer. Il arrive qu’ORPhÉE soit « bloqué ». Si une étape semble durer plus longtemps qu’elle ne le devrait, appuyez une fois sur « Entrée ». Si les étapes suivantes se déclenchent immédiatement, il s’agissait d’un simple blocage. S’il ne se passe rien, c’est qu’il est encore en train de travailler : laissez-lui un peu plus de temps. Si les délais évoqués ci-dessus sont largement dépassés, ou si un message d’erreur apparait, vous pouvez fermer l’application.
@@ -142,9 +142,9 @@ La fermeture de l’application arrêtera le processus de création du SIP, veil
 ##### 2.3.1.	Problème d’identification de la donnée pivot : l’identifiant e numéro de reportage
 Si un numéro identifiant de reportage présent dans le fichier texte n’est pas trouvé parmi les dossiers, le message « ERREUR : Le reportage X n'a pas été trouvé dans le répertoire Y. » s’affichera pendant l’étape d’extraction des métadonnées internes des photos et la moulinette sera interrompue.
 Que faire ? 
-o	Vérifier l’identifiant e numéro de reportage : la forme présente dans le nom du dossier est peut-être légèrement différente de celle inscrite dans les fichiers csv et texte.
-o	Vérifier que vous disposez bien de ce reportage : le dossier correspondant est-il présent dans les fichiers ? Si non, il est peut-être mal rangé : il est possible qu’il ait été malencontreusement glissé dans un autre dossier de reportage. Une recherche sur l’identifiant e numéro de reportage dans l’explorateur Windows devrait permettre de le débusquer !
-o	Vérifier que le reportage existe bien en vous référant à l’instrument de recherche : s’il s’agit de numéros, il peut y avoir un « trou » dans la numérotation des reportages.
+*	Vérifier l’identifiant e numéro de reportage : la forme présente dans le nom du dossier est peut-être légèrement différente de celle inscrite dans les fichiers csv et texte.
+*	Vérifier que vous disposez bien de ce reportage : le dossier correspondant est-il présent dans les fichiers ? Si non, il est peut-être mal rangé : il est possible qu’il ait été malencontreusement glissé dans un autre dossier de reportage. Une recherche sur l’identifiant e numéro de reportage dans l’explorateur Windows devrait permettre de le débusquer !
+*	Vérifier que le reportage existe bien en vous référant à l’instrument de recherche : s’il s’agit de numéros, il peut y avoir un « trou » dans la numérotation des reportages.
 
 
 ##### 2.3.2.	Les fichiers système et fichiers cachés
@@ -163,9 +163,9 @@ La présence de chemins trop longs et de certains caractères spéciaux dans les
 ### 3.	Fonctionnement du script
 #### 3.1.	Traitement des données importées
 Les informations renseignées dans le formulaire se présentent dans l’application sous la forme d’un dictionnaire Python, composé de clés et de valeurs. Les métadonnées renseignées dans la première partie seront appelées à différents endroits du script pour les inscrire à leur place dans le manifest. Les autres informations sont traitées dans la première partie du processus.
--	select_csv() récupère dans le formulaire le chemin vers le fichier csv créé à partir de l’instrument de recherche, encodé en UTF-8, et contenant les informations suivantes : numéro identifiant due reportage, titre du reportage, date de début, date de fin. La fonction retourne le contenu du fichier sous la forme d’une liste de listes (une liste par ligne du csv, donc une liste par reportage).
--	select_list_rp() récupère dans le formulaire le chemin du fichier texte contenant la liste des numéros identifiants des reportages à ajouter au SIP. La fonction transforme le contenu du fichier en une liste Python.
--	 chose_target_dir() récupère dans le formulaire le chemin vers le répertoire dans lequel seront créés le manifest XML et le dossier « content » où seront copiés à plat les fichiers renommés. La fonction transforme le chemin et crée un dossier « content » vide.
+*	select_csv() récupère dans le formulaire le chemin vers le fichier csv créé à partir de l’instrument de recherche, encodé en UTF-8, et contenant les informations suivantes : numéro identifiant due reportage, titre du reportage, date de début, date de fin. La fonction retourne le contenu du fichier sous la forme d’une liste de listes (une liste par ligne du csv, donc une liste par reportage).
+*	select_list_rp() récupère dans le formulaire le chemin du fichier texte contenant la liste des numéros identifiants des reportages à ajouter au SIP. La fonction transforme le contenu du fichier en une liste Python.
+*	 chose_target_dir() récupère dans le formulaire le chemin vers le répertoire dans lequel seront créés le manifest XML et le dossier « content » où seront copiés à plat les fichiers renommés. La fonction transforme le chemin et crée un dossier « content » vide.
 
 
 #### 3.2.	L’extraction et la fusion des métadonnées internes
@@ -256,8 +256,8 @@ La fonction create_management_metadata() étant la dernière à modifier le mani
 
 ### 3.10.	Copie et renommage des fichiers
 La fonction copy() crée un chemin de destination pour chaque fichier composé de  : 
--	Le chemin vers le dossier parent  ;
--	La valeur de l’attribut «  id  » de chaque BinaryDataObject  ;
--	L’extension issue du nom du fichier (.jpg).
+*	Le chemin vers le dossier parent  ;
+*	La valeur de l’attribut «  id  » de chaque BinaryDataObject  ;
+*	L’extension issue du nom du fichier (.jpg).
 Elle récupère ensuite le chemin originel de chaque fichier tel qu’il apparait dans l’export Siegfried. Grâace à la fonction copy du module shutil, ces deux informations (ancien chemin, nouveau chemin) suffisent à copier et renommer les fichiers.
 L’identification se fait à partir du manifest et non à partir du contenu du dossier pour éviter l’ajout de fichiers non retenus lors de la reprise des données (fichiers système, fichiers raw, etc).
