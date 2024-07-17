@@ -16,7 +16,7 @@ Chaque reportage doit disposer d’un identifiant unique à l’échelle du vers
 -	À la fin du nom du dossier (ex : « Reportage 001 »)
 Assurez-vous que l’identifiant correspond à une chaine de caractères ne contenant ni caractères spéciaux ni espace : dans le cas des reportages « bis » par exemple, l’identifiant peut être « 001Bis », mais ne peut pas être « 001 Bis ». La casse n’est en revanche pas prise en compte : « 001b » et « 001B » seront considérés comme un même identifiant.
 
-####1.2. Nettoyage des données
+#### 1.2. Nettoyage des données
 Une partie du nettoyage des données est effectué par l’application qui exclut automatiquement certains fichiers système et fichiers masqués sur des critères de nommage.
 Les fichiers contenant dans leur nom les chaînes suivantes ne sont pas traités et sont donc exclus du paquet : 
 -	DS_Store
