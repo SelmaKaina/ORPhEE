@@ -4,16 +4,20 @@
 
 ORPhÉE (Outil de Reprise de Photographies et Éléments Embarqués) est une application produite au Département de l’administration des données (DAD) des Archives nationales, dans le cadre de la reprise des données des reportages photographiques de la Présidence de la République. Elle a pour fonction la fabrication de paquets d’archives (SIP) en vue de leur versement dans le SAE Vitam des Archives nationales. Son intérêt principal par rapport aux autres outils de fabrication de SIP est sa capacité à extraire les métadonnées internes des photographies, y compris les métadonnées descriptives qui ont pu être renseignées par le photographe (description, mots-clés, nom du photographe, lieux de la prise de vue).
 Une version paramétrable de l’outil a été produite, permettant son utilisation dans des contextes différents :
-1. Renseignement à l’aide d’un formulaire de certaines valeurs qui étaient inscrites « en dur » dans l’application originale (ex : identifiant du service d’archive, du service producteur et du service versant, type de contrat des photographes) ;
-2. Choix des champs de métadonnées internes à extraire.
+1) Renseignement à l’aide d’un formulaire de certaines valeurs qui étaient inscrites « en dur » dans l’application originale (ex : identifiant du service d’archive, du service producteur et du service versant, type de contrat des photographes) ;
+2) Choix des champs de métadonnées internes à extraire.
 Ce guide a pour but d’accompagner les archivistes extérieurs au DAD dans l’utilisation de l’application, mais aussi d’en présenter le fonctionnement et les modalités d’utilisation. En effet, son usage s’inscrit spécifiquement dans le contexte Vitam et peut ne pas convenir à d’autres solutions d’archivage électronique. Elle nécessite par ailleurs un nettoyage des données et la production d’un fichier de métadonnées externes selon des critères très spécifiques.
+
+
 ### 1. Traitements des données et prérequis
+
+
 #### 1.1. Prérequis de classement
 L’application a été conçue pour traiter des reportages se présentant sous la forme d’une arborescence de dossiers et de sous-dossiers. Elle permet de reconstituer cette arborescence afin de conserver la structure originelle du fonds.
 Chaque reportage doit disposer d’un identifiant unique à l’échelle du versement (il peut s’agir d’un numéro, ex : 001) et se présenter sous la forme d’un dossier dont le nom contient cet identifiant. L’identifiant sera repéré par l’application s’il se présente sous une des formes suivantes : 
--	Suivi d’une espace (ex : « 001 Investiture du président »)
--	Suivi d’un tiret bas (ex : « 001_Investiture du président »)
--	À la fin du nom du dossier (ex : « Reportage 001 »)
+* Suivi d’une espace (ex : « 001 Investiture du président »)
+* Suivi d’un tiret bas (ex : « 001_Investiture du président »)
+* À la fin du nom du dossier (ex : « Reportage 001 »)
 Assurez-vous que l’identifiant correspond à une chaine de caractères ne contenant ni caractères spéciaux ni espace : dans le cas des reportages « bis » par exemple, l’identifiant peut être « 001Bis », mais ne peut pas être « 001 Bis ». La casse n’est en revanche pas prise en compte : « 001b » et « 001B » seront considérés comme un même identifiant.
 
 #### 1.2. Nettoyage des données
@@ -39,6 +43,8 @@ Des analyses et nettoyages préalables sont cependant nécessaires en amont de l
     -	Les icônes (ex : ☎, ✂).
 
 #### 1.3.	Préparation des fichiers de données
+
+
 ##### 1.3.1.	Le CSV de métadonnées externes
 Le csv de métadonnées ingéré par la moulinette doit reprendre les informations présentes dans l’instrument de recherche. 
 Le csv ingéré par le scriptCe csv doit impérativement prendre la forme suivante : 
@@ -46,50 +52,54 @@ Identifiant du Numéro de reportage ; Titre du reportage ; Date de début ; Date
 La colonne contenant le numérol’identifiant de reportage doit être au format Texte afin d’éviter la perte des « 0 » en début de chaîne (ils qui seront supprimés si les cellules sont au format Nombre). Assurez-vous également qu’il n’y a pas d’espaces en début ou fin de chaîne.
 Les dates doivent être au format suivant : JJ.MM.AAAA
 Une cinquième colonne contenant la coôte des unités d’archive de niveau reportage peut être ajoutée et entraînera la création des balises SEDA correspondantes. Attention à ne pas ajouter une cinquième colonne contenant une autre information : ses valeurs seront automatiquement interprétées comme étant les coôtes des articles et seront ajoutées au manifest en tant que telles. 
+
+
 ##### 1.3.2.	La liste de reportages
 Confrontés aux restrictions de volumétrie imposées par le SAE des Archives nationales, qui n’accepte pas de SIP de plus de 30Go en entrée unitaire à l’heure actuelle, nous avons envisagé plusieurs méthodes de sélection des reportages à intégrer à chaque SIP. 
 La copie de l’ensemble des reportages sélectionnés dans un répertoire spécifique qui serait intégré au SIP dans son ensemble posait plusieurs problèmes : 
--	Le risque de perte de données au cours de la copie des fichiers dans ce répertoire « tampon » ;
--	Le risque de copier plusieurs fois certains reportages, ou au contraire d’en oublier dans le contexte d’une copie en masse (par exemple si ceux-ci n’apparaissent pas dans l’ordre alphabétique dans le répertoire d’origine) ;  
--	Le délai nécessaire à la copie des fichiers vers l’espace tampon.
+* Le risque de perte de données au cours de la copie des fichiers dans ce répertoire « tampon » ;
+* Le risque de copier plusieurs fois certains reportages, ou au contraire d’en oublier dans le contexte d’une copie en masse (par exemple si ceux-ci n’apparaissent pas dans l’ordre alphabétique dans le répertoire d’origine) ;  
+* Le délai nécessaire à la copie des fichiers vers l’espace tampon.
 Une solution basée sur des limites volumétrique imposées à l’application a également été écartée, dans la mesure où elle ne permettait pas au fabricateur du SIP de contrôler le contenu du paquet : 
--	Risque d’import de reportages non consécutifs ;
--	Empêche une sélection selon une logique intellectuelle qui pourrait être souhaitée par le fabricateur (regroupement selon des critères temporels ou de communicabilité par exemple).
+* Risque d’import de reportages non consécutifs ;
+* Empêche une sélection selon une logique intellectuelle qui pourrait être souhaitée par le fabricateur (regroupement selon des critères temporels ou de communicabilité par exemple).
 La solution retenue est celle d’un fichier texte importé dans l’application et dans lequel se trouvent l’ensemble des identifiants des reportages à ajouter au paquet. Chaque identifiant de reportage doit occuper une ligne, sans ajout de séparateur ni d’espace. Ils doivent apparaître dans l’ordre dans lequel on souhaite que les reportages apparaissent dans le SIP. Si les identifiants sont correctement triés dans le csv de métadonnées externes, alors il suffit de copier les cellules de la colonne correspondant aux identifiants des reportages à ajouter et de les coller dans le fichier texte.
 Nota : Cette étape peut être fastidieuse, notamment pour les reportages « bis » qui risquent de ne pas apparaître au bon endroit lorsque le csv est trié en suivant l’ordre des numéros identifiants de reportage.
 
 
 ##### 1.3.3.	Points de vigilance
-1 : Veiller à ce que les numéros identifiants de reportage du fichier csv et du fichier texte soient identiques à ceux présents dans les noms des dossiers de reportages. Apporter une attention particulière aux reportages avec des identifiants spéciaux, par exemple avec la mention « bis », qui peut être écrite en toutes lettres ou seulement indiquée par la lettre « B ». Le cas échéant, il n’est pas nécessaire de corriger les différences de casse : pour la reconnaissance des numéros identifiants de reportages, la moulinette passe automatiquement la chaîne en minuscules. 
-2 : Veiller à ce que les fichiers csv et txt soient bien encodés en UTF-8.
-3 : Dans la colonne « Numéro/identifiant du reportage » comme dans le fichier texte, veiller à ce que chaque ligne non vide contienne bien un numéro identifiant de reportage valide. Toute chaîne de caractères identifiée dans la colonne « Numéro/identifiant du reportage » ou dans une ligne du fichier texte peut servir de valeur pivot et donc remonter des informations erronées : par exemple, une cellule ne contenant qu’une espace sera associée à l’ensemble des dossiers dont le nom contient contenant au moins une espace dans leur nom. 
-2.	Mode d’emploi détaillé de l’application
+1) Veiller à ce que les numéros identifiants de reportage du fichier csv et du fichier texte soient identiques à ceux présents dans les noms des dossiers de reportages. Apporter une attention particulière aux reportages avec des identifiants spéciaux, par exemple avec la mention « bis », qui peut être écrite en toutes lettres ou seulement indiquée par la lettre « B ». Le cas échéant, il n’est pas nécessaire de corriger les différences de casse : pour la reconnaissance des numéros identifiants de reportages, la moulinette passe automatiquement la chaîne en minuscules. 
+2) Veiller à ce que les fichiers csv et txt soient bien encodés en UTF-8.
+3) Dans la colonne « Numéro/identifiant du reportage » comme dans le fichier texte, veiller à ce que chaque ligne non vide contienne bien un numéro identifiant de reportage valide. Toute chaîne de caractères identifiée dans la colonne « Numéro/identifiant du reportage » ou dans une ligne du fichier texte peut servir de valeur pivot et donc remonter des informations erronées : par exemple, une cellule ne contenant qu’une espace sera associée à l’ensemble des dossiers dont le nom contient contenant au moins une espace dans leur nom.
+
+
+### 2.	Mode d’emploi détaillé de l’application
 
 
 #### 2.1.	Le formulaire
 Pour s’adapter à des contextes différents de celui dans lequel l’application a été originellement créée, mais aussi pour faciliter son l’utilisation de l’application, un formulaire a été créé. Il peut être divisé en quatre parties : 
--	Les informations à renseigner ;
--	Le choix des métadonnées internes à extraire ;
--	Le rattachement à une autre unité d’archive (optionnel) ;
--	L’import des données et des fichiers de métadonnées externes (liste des reportages et instrument de recherche).
+* Les informations à renseigner ;
+* Le choix des métadonnées internes à extraire ;
+* Le rattachement à une autre unité d’archive (optionnel) ;
+* L’import des données et des fichiers de métadonnées externes (liste des reportages et instrument de recherche).
 
--	
+  
 ##### 2.1.1.	Les informations à renseigner
 Les deux premières informations à fournir sont le numéro d’entrée du paquet et le numéro du paquet. Ces informations seront ensuite fusionnées et complétées afin de créer le contenu de l’élément SEDA ArchivalAgencyArchiveUnitIdentifier de chaque unité d’archive, c’est-à-dire la nouvelle cote de l’UA dans le SAE numérique.
 
--	Intitulé du versement : contenu des éléments SEDA Comment et MessageIdentifier.
--	ArchivalAgency Identifier : nom du service d’archives auquel sera versé le paquet (ex : Archives nationales).
--	TransferringAgency : nom du service versant (ex : Service photographique de la Présidence).
--	OriginatingAgency Identifier : identifiant du service producteur (ex : FRAN_NP_009886).
--	SubmissionAgency : identifiant du service versant (ex : FRAN_NP_009886).
--	ArchivalAgreement : référence à un contrat d’entrée (ex : FRAN_CE_0001).
--	AuthorizedAgent Activity : activité de la personne détenant des droits sur le fichier et dont le nom sera extrait des métadonnées internes. Il s’agit probablement du photographe, mais la valeur du champ peut être adaptée aux différents contextes de production. Notez que cet élément ne sera créé que si le service producteur a renseigné au préalable un des champs de métadonnées suivants : a été renseigné au préalable par le service producteur ( By-line, Artist, Creator).
--	AuthorizedAgent Mandate : type de contrat liant le détenteur de droits aux photographies. S’agit-il d’un photographe agent de service public, d’un photographe privé, d’un photographe d’agence de presse ? Notez que cet élément ne sera créé que si le service producteur a renseigné au préalable un des champs de métadonnées suivants a été renseigné au préalable par le service producteur : By-line, Artist, Creator.
+* Intitulé du versement : contenu des éléments SEDA Comment et MessageIdentifier.
+* ArchivalAgency Identifier : nom du service d’archives auquel sera versé le paquet (ex : Archives nationales).
+* TransferringAgency : nom du service versant (ex : Service photographique de la Présidence).
+* OriginatingAgency Identifier : identifiant du service producteur (ex : FRAN_NP_009886).
+* SubmissionAgency : identifiant du service versant (ex : FRAN_NP_009886).
+* ArchivalAgreement : référence à un contrat d’entrée (ex : FRAN_CE_0001).
+* AuthorizedAgent Activity : activité de la personne détenant des droits sur le fichier et dont le nom sera extrait des métadonnées internes. Il s’agit probablement du photographe, mais la valeur du champ peut être adaptée aux différents contextes de production. Notez que cet élément ne sera créé que si le service producteur a renseigné au préalable un des champs de métadonnées suivants : a été renseigné au préalable par le service producteur ( By-line, Artist, Creator).
+* AuthorizedAgent Mandate : type de contrat liant le détenteur de droits aux photographies. S’agit-il d’un photographe agent de service public, d’un photographe privé, d’un photographe d’agence de presse ? Notez que cet élément ne sera créé que si le service producteur a renseigné au préalable un des champs de métadonnées suivants a été renseigné au préalable par le service producteur : By-line, Artist, Creator.
 
 
 Pour les deux éléments enfants de AuthorizedAgent évoquésez ci-dessus, notez que les valeurs choisies seront associées automatiquement à l’ensemble des fichiers pour lesquelles la métadonnée a été extraite. Si les situations varient entre les détenteurs de droits associés aux fichiers traités, il sera nécessaire de modifier le code de l’application ou de modifier manuellement le manifest après sa création par l’application. 
--	ArchivalProfile : référence au profile d’archivage applicable aux unités d’archive (ex : FRAN_PR_0001).
--	AcquisitionInformation : modalité d’entrée des archives (ex : versement, don).
+* ArchivalProfile : référence au profile d’archivage applicable aux unités d’archive (ex : FRAN_PR_0001).
+* AcquisitionInformation : modalité d’entrée des archives (ex : versement, don).
 
 
 ##### 2.1.2.	Le choix des métadonnées à extraire
@@ -108,17 +118,17 @@ Pour les deux éléments enfants de AuthorizedAgent évoquésez ci-dessus, notez
 
 
 Comme l’indique le tableau ci-dessus, plusieurs éléments peuvent correspondre à deux voire trois champs de métadonnées internes. Si un travail d’analyse des métadonnées a été réalisé en amont, il conviendra de choisir le champ le mieux renseigné au sein du fonds traité. Si plusieurs champs correspondant à une même balise SEDA sont cochés, celles-ciles métadonnées seront traitées selon un ordre de priorité : 
--	AuthorizedAgent/FullName : la valeur choisie en priorité sera celle du champ « By-line », si celui-ci est vide celle du champ « Artist », et si cellece dernier-ci est vide aussi celle du champ « Creator ».
--	Coverage/Spatial : la valeur choisie en priorité sera celle du champ « Country », et si celui-ci est vide celle du champ « Country-PrimaryLocationName ».
--	Content/Description : la valeur choisie en priorité sera celle du champ « Caption-Abstract », si celui-ci est vide celle du champ « Description ».
--	Content/Tag : la valeur choisie en priorité sera celle du champ « Subject », si celui-ci est vide celle du champ « Keywords ».
+* AuthorizedAgent/FullName : la valeur choisie en priorité sera celle du champ « By-line », si celui-ci est vide celle du champ « Artist », et si cellece dernier-ci est vide aussi celle du champ « Creator ».
+* Coverage/Spatial : la valeur choisie en priorité sera celle du champ « Country », et si celui-ci est vide celle du champ « Country-PrimaryLocationName ».
+* Content/Description : la valeur choisie en priorité sera celle du champ « Caption-Abstract », si celui-ci est vide celle du champ « Description ».
+* Content/Tag : la valeur choisie en priorité sera celle du champ « Subject », si celui-ci est vide celle du champ « Keywords ».
 Il est important de noter néanmoins que la présence et la pertinence des métadonnées internes sont tributaires de la qualité du travail d’indexation réalisé par le service producteur : si ces métadonnées n’ont pas été renseignées, ou si elles ont été mal renseignées, cela se reflètera dans le manifest produit.
 
 
 ##### 2.1.3.	Le rattachement à une autre unité d’archive
 L’application offre la possibilité de créer un paquet qui pourra ensuite être rattaché à une unité d’archive déjà versée dans le SAE. S’il souhaite effectuer un rattachement, l’utilisateur doit cocher la case et renseigner deux informations : 
--	la valeur de la balise <ArchivalAgencyArchiveUnitIdentifier> de l'UA de rattachement
--	la valeur de la balise <Title> de l'UA de rattachement.
+* la valeur de la balise <ArchivalAgencyArchiveUnitIdentifier> de l'UA de rattachement
+* la valeur de la balise <Title> de l'UA de rattachement.
 Cette option entraîne la création d’une unité d’archive « fantôme », correspondant à l’unité d’archive déjà versée à laquelle les reportages du paquet seront ensuite rattachés. Ainsi, au lieu d’apparaître en râteau dans le manifest, l’ensemble des reportages du paquet seront des éléments enfants de cette UA fantôme. Cette dernière n’apparaîtra pas dans le SIA numérique après le rattachement du SIP l’unité d’archive choisie.
 L’ArchiveUnit de l’UA fantôme aura un élément <Management> avec la structure suivante : 
  
@@ -140,7 +150,7 @@ Après avoir soumis le formulaire, l’application va commencer la fabrication d
 * Écriture du manifest.
 * Copie et renommage des fichiers dans le dossier content.
 
-Certaines étapes peuvent être longues, notamment l’extraction des métadonnées internes. ÀA titre indicatif, la constitution d’un paquet de 20Go peut prendre entre 10min et 20min, celle d’un paquet de 60Go entre 20min et 30min, et celle d’un paquet de 100Go entre 40min et 1h. 
+Certaines étapes peuvent être longues, notamment l’extraction des métadonnées internes. À titre indicatif, la constitution d’un paquet de 20Go peut prendre entre 10min et 20min, celle d’un paquet de 60Go entre 20min et 30min, et celle d’un paquet de 100Go entre 40min et 1h. 
 La fermeture de l’application arrêtera le processus de création du SIP : celle-ci elle ne doit donc être fermée qu’en cas d’erreur ou de dépassement des délais évoqués ci-dessus. 
 La fermeture de l’application arrêtera le processus de création du SIP, veillez donc à ne pas interrompre le processus simplement car, même si rien ne semble se passer. Il arrive qu’ORPhÉE soit « bloqué ». Si une étape semble durer plus longtemps qu’elle ne le devrait, appuyez une fois sur « Entrée ». Si les étapes suivantes se déclenchent immédiatement, il s’agissait d’un simple blocage. S’il ne se passe rien, c’est qu’il est encore en train de travailler : laissez-lui un peu plus de temps. Si les délais évoqués ci-dessus sont largement dépassés, ou si un message d’erreur apparait, vous pouvez fermer l’application.
 
@@ -157,8 +167,8 @@ Que faire ?
 ##### 2.3.2.	Les fichiers système et fichiers cachés
 Certains fichiers systèmes (qui ne sont pas à conserver), tels que les « desktop.ini », ne sont pas identifiés par tous les composants de la moulinette et entraînent donc des incohérences au sein des données à traiter. Ces incohérences peuvent ensuite provoquer une erreur qui va interrompre la moulinette. L’erreur peut prendre la forme suivante : « AttributeError : ‘NoneType’ object has no attribute ‘split’ ».
 Comment identifier le(s) fichier(s) à supprimer ?
-o	Chercher le(s) fichier(s) problématique(s) à l’aide d’un export DROID
-o	Utiliser la version « debug » de la moulinette qui devrait afficher le nom du fichier problématique au moment où il cause une erreur. Cette solution ne permettra d’identifier que le premier fichier à causer une erreur et ne permet donc pas d’identifier plusieurs fichiers problématiques (l’opération sera alors à répéter jusqu’à ce que tous cles fichiers aient été supprimés).
+* Chercher le(s) fichier(s) problématique(s) à l’aide d’un export DROID
+* Utiliser la version « debug » de la moulinette qui devrait afficher le nom du fichier problématique au moment où il cause une erreur. Cette solution ne permettra d’identifier que le premier fichier à causer une erreur et ne permet donc pas d’identifier plusieurs fichiers problématiques (l’opération sera alors à répéter jusqu’à ce que tous cles fichiers aient été supprimés).
 
 
 ##### 2.3.3.	Les chemins de fichier trop longs ou caractères spéciaux
@@ -168,6 +178,8 @@ La présence de chemins trop longs et de certains caractères spéciaux dans les
 
 
 ### 3.	Fonctionnement du script
+
+
 #### 3.1.	Traitement des données importées
 Les informations renseignées dans le formulaire se présentent dans l’application sous la forme d’un dictionnaire Python, composé de clés et de valeurs. Les métadonnées renseignées dans la première partie seront appelées à différents endroits du script pour les inscrire à leur place dans le manifest. Les autres informations sont traitées dans la première partie du processus.
 *	select_csv() récupère dans le formulaire le chemin vers le fichier csv créé à partir de l’instrument de recherche, encodé en UTF-8, et contenant les informations suivantes : numéro identifiant due reportage, titre du reportage, date de début, date de fin. La fonction retourne le contenu du fichier sous la forme d’une liste de listes (une liste par ligne du csv, donc une liste par reportage).
