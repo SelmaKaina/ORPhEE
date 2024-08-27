@@ -7,7 +7,9 @@ Une version paramétrable de l’outil a été produite, permettant son utilisat
 Ce guide a pour but d’accompagner les archivistes extérieurs au DAD dans l’utilisation de l’application, mais aussi d’en présenter le fonctionnement et les modalités d’utilisation. En effet, son usage s’inscrit spécifiquement dans le contexte Vitam et peut ne pas convenir à d’autres solutions d’archivage électronique. Elle nécessite par ailleurs un nettoyage des données et la production d’un fichier de métadonnées externes selon des critères très spécifiques.
 
 Le dossier "orphee_ui" contient le code de l'application avec interface utilisateur.
+
 Le dossier "orphee_dad" contient le code original de l'application adapté au contexte spécifique de la reprise des reportages photographiques des Présidents de la République aux Archives nationales.
+
 Le dossier "executables" contient les fichiers exe des deux versions du code.
 
 ## 1. Traitements des données et prérequis
